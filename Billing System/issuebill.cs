@@ -21,7 +21,7 @@ namespace Billing_System
         {
             string str = "select * from additem where itemcode='" + textBox1.Text + "'";
             c1.cmd = new SqlCommand(str,c1.con);
-            c1.cmd.ExecuteNonQuery();
+            c1.cmd.ExecuteNonQuery(); 
             c1.dr = c1.cmd.ExecuteReader();
             
             while (c1.dr.Read()) {
