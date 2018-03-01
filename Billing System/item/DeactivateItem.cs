@@ -47,6 +47,7 @@ namespace Billing_System.item
                 MessageBox.Show("wrong Input");
 
             textBox1.Clear();
+            textBox1.Focus();
         }
 
         private void DeactivateItem_Load(object sender, EventArgs e) => this.Owner.Enabled = false;

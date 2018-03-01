@@ -2,36 +2,49 @@
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using Billing_System.ConnectServer;
+using Billing_System.Utility;
 namespace Billing_System
 {
     public partial class issuebill : Form
     {
+        commonutility cu = new commonutility();
         Connection c1 = new Connection();
-        public issuebill()
-        {
-            InitializeComponent();
-           
-        }
+        public issuebill() => InitializeComponent();
 
-        private void issuebill_Load(object sender, EventArgs e)
-        {
-            this.Owner.Enabled = false;
-        }
+        private void checkString(object sender, KeyPressEventArgs e) => cu.checkIsStringOrNot(e);
+        private void checkDigit(object sender, KeyPressEventArgs e) => cu.checkIsDigitOrNot(e);
+        private void checkBoth(object sender, KeyPressEventArgs e) => cu.checkBothDS(e);
+
+        private void issuebill_Load(object sender, EventArgs e) => this.Owner.Enabled = false;
+
         private void button1_Click(object sender, EventArgs e)
         {
-            string str = "select * from additem where itemcode='" + textBox1.Text + "'";
+            string str = "select * from additem where itemcode='" + textBox4.Text + "'";
             c1.cmd = new SqlCommand(str,c1.con);
             c1.cmd.ExecuteNonQuery(); 
             c1.dr = c1.cmd.ExecuteReader();
-            
-            while (c1.dr.Read()) {
-                string itemname = c1.dr.GetString(1);
-                string itemprice = c1.dr.GetInt32(2).ToString();
-                float ty = c1.dr.GetInt32(2) * Convert.ToInt32(textBox5.Text);
+            if (c1.dr.HasRows==false)
+                MessageBox.Show("wrong code");
+            else
+            {
+                while (c1.dr.Read())
+                {
 
-                dataGridView1.Rows.Add(itemname,itemprice,textBox5.Text,0,ty);
-              }
+                    string itemname = c1.dr.GetString(1);
+                    string itemprice = c1.dr.GetSqlMoney(2).ToString();
+                    int ty = c1.dr.GetSqlMoney(2).ToInt32() * Convert.ToInt32(textBox5.Text);
+                    int discount,gd;
+                    discount = Convert.ToInt32(textBox7.Text);
+                    gd = ty - discount;
+                    dataGridView1.Rows.Add(itemname, itemprice, textBox5.Text, ty, discount, gd);
+                }
+             }
             c1.dr.Close();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox7.Clear();
+            textBox4.Focus();
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -109,6 +122,11 @@ namespace Billing_System
         private void issuebill_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Owner.Enabled = true;
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
