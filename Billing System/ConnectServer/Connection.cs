@@ -21,6 +21,7 @@ namespace Billing_System.ConnectServer
         public Boolean Function(string qry)
         {
             cmd = new SqlCommand(qry, con);
+           
             dr = cmd.ExecuteReader();
             if (dr.HasRows == true)
             {

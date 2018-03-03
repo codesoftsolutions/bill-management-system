@@ -49,6 +49,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(377, 65);
+            this.label2.Location = new System.Drawing.Point(257, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 17);
             this.label2.TabIndex = 0;
@@ -92,13 +94,14 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(314, 22);
             this.textBox2.TabIndex = 2;
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkString);
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(633, 62);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
+            this.button1.TabIndex = 7;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -108,7 +111,7 @@
             this.button3.Location = new System.Drawing.Point(330, 436);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(125, 38);
-            this.button3.TabIndex = 9;
+            this.button3.TabIndex = 10;
             this.button3.Text = "Save Bill";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -118,13 +121,17 @@
             this.button4.Location = new System.Drawing.Point(729, 62);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 7;
+            this.button4.TabIndex = 8;
             this.button4.Text = "Delete";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -138,21 +145,22 @@
             this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.On;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(920, 220);
             this.dataGridView1.StandardTab = true;
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.TabStop = false;
-            this.dataGridView1.VirtualMode = true;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(97, 63);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(274, 22);
+            this.textBox4.Size = new System.Drawing.Size(154, 22);
             this.textBox4.TabIndex = 4;
+            this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkBoth);
             // 
             // label5
             // 
@@ -165,18 +173,19 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(444, 62);
+            this.textBox5.Location = new System.Drawing.Point(320, 63);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(183, 22);
+            this.textBox5.Size = new System.Drawing.Size(106, 22);
             this.textBox5.TabIndex = 5;
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkDigit);
             // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(821, 62);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 8;
+            this.button5.TabIndex = 9;
             this.button5.Text = "Clear";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -213,6 +222,7 @@
             this.textBox3.Size = new System.Drawing.Size(141, 22);
             this.textBox3.TabIndex = 3;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkDigit);
             // 
             // label4
             // 
@@ -240,13 +250,16 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.button5);
+            this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.textBox4);
+            this.panel2.Controls.Add(this.textBox7);
             this.panel2.Controls.Add(this.textBox5);
             this.panel2.Location = new System.Drawing.Point(0, 89);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(920, 100);
             this.panel2.TabIndex = 6;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label6
             // 
@@ -263,10 +276,28 @@
             this.button2.Location = new System.Drawing.Point(461, 436);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 38);
-            this.button2.TabIndex = 10;
+            this.button2.TabIndex = 11;
             this.button2.Text = "Cancle";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(500, 63);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(111, 22);
+            this.textBox7.TabIndex = 6;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkDigit);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(432, 66);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 17);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Discount";
             // 
             // item
             // 
@@ -305,6 +336,7 @@
             this.Discount.HeaderText = "Discount";
             this.Discount.MinimumWidth = 2;
             this.Discount.Name = "Discount";
+            this.Discount.ReadOnly = true;
             this.Discount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // GrandTotal
@@ -333,11 +365,10 @@
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "issuebill";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "issuebill";
-            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.issuebill_FormClosed);
             this.Load += new System.EventHandler(this.issuebill_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -372,6 +403,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.DataGridViewTextBoxColumn item;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;

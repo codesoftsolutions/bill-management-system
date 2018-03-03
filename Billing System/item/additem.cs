@@ -63,6 +63,7 @@ namespace Billing_System.item
                 textBox2.Clear();
                 textBox3.Clear();
                 textBox4.Clear();
+                textBox1.Focus();
                 }
         }
         private void additem_Load(object sender, EventArgs e) => this.Owner.Enabled = false;
