@@ -15,8 +15,9 @@ namespace Billing_System.ConnectServer
 
         public Connection()
         {
-          con = new SqlConnection("Data Source=DESKTOP-TLF4378;Initial Catalog=Billing_System;Integrated Security=True");
-         con.Open();
+//          con = new SqlConnection("Data Source=DESKTOP-TLF4378;Initial Catalog=Billing_System;Integrated Security=True");
+            con = new SqlConnection("Data Source=Mihir-PC;Initial Catalog=Billing_System;Integrated Security=True");
+            con.Open();
         }
         public Boolean Function(string qry)
         {
